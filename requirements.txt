@@ -1,0 +1,5 @@
+Flask==2.3.3
+Flask-Cors==3.0.10
+requests==2.31.0
+camoufox
+camoufox[geoip]
