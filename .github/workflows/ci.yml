@@ -28,7 +28,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t my-app .
+        docker build -t sophnet2api .
 
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
@@ -38,11 +38,11 @@ jobs:
 
     - name: Tag Docker image
       run: |
-        docker tag my-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/Sophnet2api:latest
+        docker tag sophnet2api:latest ${{ secrets.DOCKER_HUB_USERNAME }}/sophnet2api:latest
 
     - name: Push Docker image
       run: |
-        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/Sophnet2api:latest
+        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/sophnet2api:latest
 
     - name: Run tests
       run: |
