@@ -34,9 +34,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy Python packages from builder stage
 COPY --from=builder /root/.local /root/.local
 
-# Install playwright chromium and clean up
+# Install playwright chromium browser and clean up
 RUN PATH=/root/.local/bin:$PATH playwright install chromium && \
-    rm -rf /root/.cache/* /tmp/* /var/tmp/*
+    rm -rf /tmp/* /var/tmp/*
 
 # Copy application files
 COPY . /app
