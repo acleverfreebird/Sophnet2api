@@ -1,8 +1,8 @@
-FROM python:3.12
+FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install system dependencies for playwright
+# Install system dependencies for playwright in a single layer to reduce image size
 RUN apt-get update && apt-get install -y \
     libnspr4 \
     libnss3 \
@@ -18,13 +18,15 @@ RUN apt-get update && apt-get install -y \
     libxrandr2 \
     libgbm1 \
     libasound2 \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Python dependencies and playwright in a single layer
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-RUN playwright install chromium
-RUN playwright install-deps
+RUN pip install --no-cache-dir -r requirements.txt && \
+    playwright install chromium && \
+    rm -rf /root/.cache/pip
 
 COPY . /app
 
-CMD ["sh", "-c", "python main.py"]
+CMD ["python", "main.py"]
