@@ -8,4 +8,4 @@ RUN playwright install chromium
 
 COPY . /app
 
-CMD ["sh", "-c", "camoufox fetch && python main.py"]
+CMD ["sh", "-c", "python main.py"]
